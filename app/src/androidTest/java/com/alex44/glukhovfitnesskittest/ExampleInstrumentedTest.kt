@@ -1,4 +1,4 @@
-package com.alex44.glukhovfitness_kittest
+package com.alex44.glukhovfitnesskittest
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

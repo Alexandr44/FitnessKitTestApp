@@ -1,4 +1,4 @@
-package com.alex44.glukhovfitness_kittest
+package com.alex44.glukhovfitnesskittest
 
 import org.junit.Test
 
