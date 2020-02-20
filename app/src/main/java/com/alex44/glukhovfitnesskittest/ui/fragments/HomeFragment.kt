@@ -5,12 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.alex44.glukhovfitnesskittest.App
 import com.alex44.glukhovfitnesskittest.R
 import com.alex44.glukhovfitnesskittest.presenters.HomePresenter
 import com.alex44.glukhovfitnesskittest.views.HomeView
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
+import io.reactivex.android.schedulers.AndroidSchedulers
 
 class HomeFragment : MvpAppCompatFragment(), HomeView {
 
@@ -30,7 +32,11 @@ class HomeFragment : MvpAppCompatFragment(), HomeView {
     }
 
     @ProvidePresenter
-    fun createPresenter() = HomePresenter()
+    fun createPresenter() : HomePresenter {
+        val presenter = HomePresenter(AndroidSchedulers.mainThread())
+        App.instance.appComponent.inject(presenter)
+        return presenter
+    }
 
     override fun initRV() {
     }
