@@ -1,5 +1,6 @@
 package com.alex44.glukhovfitnesskittest.presenters
 
+import com.alex44.glukhovfitnesskittest.common.navigation.Screens
 import com.alex44.glukhovfitnesskittest.views.MainView
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
@@ -14,6 +15,7 @@ class MainPresenter : MvpPresenter<MainView>() {
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
+        router.newRootScreen(Screens.HomeScreen())
     }
 
 }
