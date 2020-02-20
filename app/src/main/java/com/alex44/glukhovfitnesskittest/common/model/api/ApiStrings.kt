@@ -4,7 +4,7 @@ class ApiStrings {
 
     companion object {
 
-        val RETROFIT_BASE_URL = ""
+        const val RETROFIT_BASE_URL = "https://sample.fitnesskit-admin.ru/"
 
     }
 
