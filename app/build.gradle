@@ -61,6 +61,9 @@ dependencies {
     kapt 'androidx.room:room-compiler:2.1.0'
     //Cicerone
     implementation 'ru.terrakok.cicerone:cicerone:5.0.0'
+    //rv indicator
+    implementation "ru.tinkoff.scrollingpagerindicator:scrollingpagerindicator:1.1.0"
+
 
 
     testImplementation 'junit:junit:4.12'

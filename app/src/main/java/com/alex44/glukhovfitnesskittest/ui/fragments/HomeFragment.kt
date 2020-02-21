@@ -5,19 +5,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearSnapHelper
 import com.alex44.glukhovfitnesskittest.App
 import com.alex44.glukhovfitnesskittest.R
 import com.alex44.glukhovfitnesskittest.presenters.HomePresenter
+import com.alex44.glukhovfitnesskittest.ui.adapters.DaysAdapter
 import com.alex44.glukhovfitnesskittest.views.HomeView
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import io.reactivex.android.schedulers.AndroidSchedulers
+import kotlinx.android.synthetic.main.fragment_home.*
+
 
 class HomeFragment : MvpAppCompatFragment(), HomeView {
 
     @InjectPresenter
     lateinit var presenter: HomePresenter
+
+    var adapter : DaysAdapter? = null
 
     companion object {
         fun newInstance() = HomeFragment()
@@ -39,9 +46,16 @@ class HomeFragment : MvpAppCompatFragment(), HomeView {
     }
 
     override fun initRV() {
+        adapter = DaysAdapter(presenter)
+        days_rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        days_rv.adapter = adapter
+        days_rv_indicator.attachToRecyclerView(days_rv)
+        val helper = LinearSnapHelper()
+        helper.attachToRecyclerView(days_rv)
     }
 
     override fun updateRV() {
+        adapter?.notifyDataSetChanged()
     }
 
     override fun showMessage(message: String) {
