@@ -5,6 +5,7 @@ import com.alex44.glukhovfitnesskittest.model.dto.LessonDTO
 import com.alex44.glukhovfitnesskittest.model.repo.IDataRepo
 import com.alex44.glukhovfitnesskittest.views.DayView
 import com.alex44.glukhovfitnesskittest.views.HomeView
+import com.alex44.glukhovfitnesskittest.views.LessonView
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import io.reactivex.Scheduler
@@ -66,6 +67,22 @@ class HomePresenter(private val mainThreadScheduler : Scheduler) : MvpPresenter<
         if (dayHolder.getItemPosition() < 0 || dayHolder.getItemPosition() > days.size-1) return
         val day = days[dayHolder.getItemPosition()]
         dayHolder.setDayName(day.dayName)
+    }
+
+    fun bind(lessonHolder: LessonView, dayIndex : Int) {
+        if (dayIndex < 0 || dayIndex > days.size-1) return
+        if (lessonHolder.getItemPosition() < 0 || lessonHolder.getItemPosition() > days[dayIndex].lessons.size-1) return
+        val lesson = days[dayIndex].lessons[lessonHolder.getItemPosition()]
+        lesson.apply {
+            lessonHolder.setLessonName(name.orEmpty())
+            lessonHolder.setDescription(description.orEmpty())
+            lessonHolder.setPlace(place.orEmpty())
+            lessonHolder.setTeacherName(teacher.orEmpty())
+            lessonHolder.setStartTime(startTime.orEmpty())
+            lessonHolder.setEndTime(endTime.orEmpty())
+            lessonHolder.setColor(color?:"#FFF")
+        }
+
     }
 
 }

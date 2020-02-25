@@ -3,7 +3,9 @@ package com.alex44.glukhovfitnesskittest.ui.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.alex44.glukhovfitnesskittest.App
 import com.alex44.glukhovfitnesskittest.R
 import com.alex44.glukhovfitnesskittest.presenters.HomePresenter
 import com.alex44.glukhovfitnesskittest.views.DayView
@@ -25,12 +27,17 @@ class DaysAdapter(private val presenter : HomePresenter) : RecyclerView.Adapter<
         dayHolder?.apply {
             elementPosition = position
             presenter.bind(this)
+            adapter = LessonsAdapter(presenter, elementPosition)
+            itemView.lessons_rv.layoutManager = LinearLayoutManager(App.instance, LinearLayoutManager.VERTICAL, false)
+            itemView.lessons_rv.adapter = adapter
         }
     }
 
-    inner class DayHolder(private val view : View) : RecyclerView.ViewHolder(view), DayView {
+    inner class DayHolder(val view : View) : RecyclerView.ViewHolder(view), DayView {
 
         var elementPosition : Int = 0
+
+        var adapter : LessonsAdapter? = null
 
         override fun setDayName(name: String) {
             view.rv_day_name.text = name

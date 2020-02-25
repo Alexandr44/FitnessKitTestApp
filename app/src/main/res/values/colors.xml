@@ -3,4 +3,5 @@
     <color name="colorPrimary">#FC991D</color>
     <color name="colorPrimaryDark">#E65100</color>
     <color name="colorAccent">#0288D1</color>
+    <color name="dayBackgroundColor">#FFE0B2</color>
 </resources>
