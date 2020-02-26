@@ -10,6 +10,8 @@ import com.alex44.glukhovfitnesskittest.R
 import com.alex44.glukhovfitnesskittest.presenters.HomePresenter
 import com.alex44.glukhovfitnesskittest.views.DayView
 import kotlinx.android.synthetic.main.fragment_home_rv_item.view.*
+import androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_IDLE
+
 
 class DaysAdapter(private val presenter : HomePresenter) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -30,6 +32,18 @@ class DaysAdapter(private val presenter : HomePresenter) : RecyclerView.Adapter<
             adapter = LessonsAdapter(presenter, elementPosition)
             itemView.lessons_rv.layoutManager = LinearLayoutManager(App.instance, LinearLayoutManager.VERTICAL, false)
             itemView.lessons_rv.adapter = adapter
+            itemView.lessons_rv.clearOnScrollListeners()
+            if (presenter.rvPosition == position) {
+                (itemView.lessons_rv?.layoutManager as? LinearLayoutManager)?.scrollToPosition(presenter.subRvPosition)
+            }
+            itemView.lessons_rv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                    super.onScrollStateChanged(recyclerView, newState)
+                    if (newState == SCROLL_STATE_IDLE) {
+                        presenter.subRvPosition = (recyclerView.layoutManager as? LinearLayoutManager)?.findFirstCompletelyVisibleItemPosition()?:0
+                    }
+                }
+            })
         }
     }
 

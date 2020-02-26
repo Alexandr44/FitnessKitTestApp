@@ -17,6 +17,7 @@ import javax.inject.Inject
 @InjectViewState
 class HomePresenter(private val mainThreadScheduler : Scheduler) : MvpPresenter<HomeView>() {
 
+    var subRvPosition: Int = 0
     var rvPosition: Int = 0
 
     @Inject
