@@ -62,4 +62,14 @@ class HomeFragment : MvpAppCompatFragment(), HomeView {
         Toast.makeText(context, message, Toast.LENGTH_LONG).show()
     }
 
+    override fun onPause() {
+        super.onPause()
+        presenter.rvPosition = (days_rv?.layoutManager as? LinearLayoutManager)?.findFirstCompletelyVisibleItemPosition()?:0
+    }
+
+    override fun onResume() {
+        super.onResume()
+        (days_rv?.layoutManager as? LinearLayoutManager)?.scrollToPosition(presenter.rvPosition)
+    }
+
 }
