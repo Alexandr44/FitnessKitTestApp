@@ -33,7 +33,7 @@ class DaysAdapter(private val presenter : HomePresenter) : RecyclerView.Adapter<
         }
     }
 
-    inner class DayHolder(val view : View) : RecyclerView.ViewHolder(view), DayView {
+    inner class DayHolder(private val view : View) : RecyclerView.ViewHolder(view), DayView {
 
         var elementPosition : Int = 0
 
