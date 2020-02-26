@@ -1,5 +1,6 @@
 package com.alex44.glukhovfitnesskittest.presenters
 
+import com.alex44.glukhovfitnesskittest.common.navigation.Screens
 import com.alex44.glukhovfitnesskittest.model.dto.DayDTO
 import com.alex44.glukhovfitnesskittest.model.dto.LessonDTO
 import com.alex44.glukhovfitnesskittest.model.repo.IDataRepo
@@ -10,6 +11,7 @@ import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import io.reactivex.Scheduler
 import io.reactivex.disposables.Disposable
+import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 
 @InjectViewState
@@ -17,6 +19,9 @@ class HomePresenter(private val mainThreadScheduler : Scheduler) : MvpPresenter<
 
     @Inject
     lateinit var repo : IDataRepo
+
+    @Inject
+    lateinit var router: Router
 
     var disposable : Disposable? = null
 
@@ -83,6 +88,14 @@ class HomePresenter(private val mainThreadScheduler : Scheduler) : MvpPresenter<
             lessonHolder.setColor(color?:"#FFF")
         }
 
+    }
+
+    fun teacherInfoClicked(dayIndex: Int, position: Int) {
+        if (dayIndex < 0 || dayIndex > days.size-1) return
+        if (position < 0 || position > days[dayIndex].lessons.size-1) return
+        days[dayIndex].lessons[position].teacherInfo?.apply {
+            router.navigateTo(Screens.TeacherScreen(this))
+        }
     }
 
 }

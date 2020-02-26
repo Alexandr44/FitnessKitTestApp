@@ -26,6 +26,7 @@ class LessonsAdapter(private val presenter : HomePresenter, private val dayIndex
         lessonHolder?.apply {
             elementPosition = position
             presenter.bind(this, dayIndex)
+            itemView.lesson_teacher_info.setOnClickListener {presenter.teacherInfoClicked(dayIndex, position)}
         }
     }
 

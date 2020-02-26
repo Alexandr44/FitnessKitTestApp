@@ -88,7 +88,7 @@
 
         <TextView
             android:id="@+id/lesson_teacher"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textSize="16sp"
             android:layout_marginEnd="8dp"
@@ -97,7 +97,22 @@
             tools:text="ФИО тренера"
             app:layout_constraintTop_toBottomOf="@+id/lesson_teacher_txt"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/lesson_teacher_info"
+            />
+
+        <ImageButton
+            android:id="@+id/lesson_teacher_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="center"
+            android:layout_marginEnd="8dp"
+            android:padding="6dp"
+            android:src="@drawable/ic_info_outline_black_24dp"
+            android:background="@drawable/background_button"
+            app:layout_constraintTop_toTopOf="@+id/lesson_teacher"
+            app:layout_constraintBottom_toBottomOf="@+id/lesson_teacher"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/lesson_teacher"
             />
 
         <LinearLayout
